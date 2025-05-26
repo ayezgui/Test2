@@ -12,3 +12,4 @@ Vérifier l'attribution automatique d'adresse IP aux appareils connectés
     Should Contain    ${leases}    ${MAC}
     Should Contain    ${leases}    192.168.4.
     CLOSE SSH SESSION
+    Log    Hello
