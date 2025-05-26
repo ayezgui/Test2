@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.13.2 on win32)" generated="20250523 09:45:12.982" rpa="false" schemaversion="4">
+<suite id="s1" name="Tests Firewall &amp; Tests firewall">
+<suite id="s1-s1" name="Tests Firewall" source="c:\Users\arezgui\Desktop\Test\Test_Auto_HGW\Tests_Firewall.robot">
+<test id="s1-s1-t1" name="Test Block HTTPS Access" line="8">
+<kw name="OPEN SSH SESSION" library="ssh_keywords">
+<arg>${HOST}</arg>
+<arg>${PORT}</arg>
+<arg>${USERNAME}</arg>
+<arg>${PASSWORD}</arg>
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${HOST}</arg>
+<arg>port=${PORT}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20250523 09:45:14.306" endtime="20250523 09:45:14.307"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${USER}</arg>
+<arg>${PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20250523 09:45:14.309" level="INFO">Logging into '192.168.4.1:22' as 'pi4'.</msg>
+<msg timestamp="20250523 09:45:16.199" level="INFO">Read output: Linux raspberrypi 6.12.20+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.12.20-1+rpt1~bpo12+1 (2025-03-19) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri May 23 09:34:52 2025 from 192.168.4.2
+[?2004hpi4@raspberrypi:~$</msg>
+<status status="PASS" starttime="20250523 09:45:14.307" endtime="20250523 09:45:16.200"/>
+</kw>
+<status status="PASS" starttime="20250523 09:45:14.304" endtime="20250523 09:45:16.200"/>
+</kw>
+<kw name="EXECUTE SSH COMMAND" library="ssh_keywords">
+<arg>sudo iptables -D FORWARD -p tcp --dport 443 -s ${TARGET_IP} -j DROP</arg>
+<kw name="Execute Command" library="SSHLibrary">
+<var>${RESULT}</var>
+<arg>${COMMAND}</arg>
+<doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
+<msg timestamp="20250523 09:45:16.205" level="INFO">Executing command 'sudo iptables -D FORWARD -p tcp --dport 443 -s 192.168.4.3 -j DROP'.</msg>
+<msg timestamp="20250523 09:45:16.262" level="INFO">Command exited with return code 1.</msg>
+<msg timestamp="20250523 09:45:16.263" level="INFO">${RESULT} = </msg>
+<status status="PASS" starttime="20250523 09:45:16.204" endtime="20250523 09:45:16.263"/>
+</kw>
+<status status="PASS" starttime="20250523 09:45:16.202" endtime="20250523 09:45:16.264"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250523 09:45:18.267" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250523 09:45:16.265" endtime="20250523 09:45:18.269"/>
+</kw>
+<kw name="CLOSE SSH SESSION" library="ssh_keywords">
+<kw name="Close Connection" library="SSHLibrary">
+<doc>Closes the current connection.</doc>
+<status status="PASS" starttime="20250523 09:45:18.273" endtime="20250523 09:45:18.276"/>
+</kw>
+<status status="PASS" starttime="20250523 09:45:18.271" endtime="20250523 09:45:18.277"/>
+</kw>
+<kw name="OPEN SSH SESSION" library="ssh_keywords">
+<arg>${HOST}</arg>
+<arg>${PORT}</arg>
+<arg>${USERNAME}</arg>
+<arg>${PASSWORD}</arg>
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${HOST}</arg>
+<arg>port=${PORT}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20250523 09:45:18.281" endtime="20250523 09:45:18.282"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${USER}</arg>
+<arg>${PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20250523 09:45:18.283" level="INFO">Logging into '192.168.4.1:22' as 'pi4'.</msg>
+<msg timestamp="20250523 09:45:20.156" level="INFO">Read output: Linux raspberrypi 6.12.20+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.12.20-1+rpt1~bpo12+1 (2025-03-19) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri May 23 09:45:15 2025 from 192.168.4.2
+[?2004hpi4@raspberrypi:~$</msg>
+<status status="PASS" starttime="20250523 09:45:18.282" endtime="20250523 09:45:20.157"/>
+</kw>
+<status status="PASS" starttime="20250523 09:45:18.279" endtime="20250523 09:45:20.158"/>
+</kw>
+<kw name="EXECUTE SSH COMMAND" library="ssh_keywords">
+<arg>sudo iptables -I FORWARD 1 -p tcp --dport 443 -s ${TARGET_IP} -j DROP</arg>
+<kw name="Execute Command" library="SSHLibrary">
+<var>${RESULT}</var>
+<arg>${COMMAND}</arg>
+<doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
+<msg timestamp="20250523 09:45:20.162" level="INFO">Executing command 'sudo iptables -I FORWARD 1 -p tcp --dport 443 -s 192.168.4.3 -j DROP'.</msg>
+<msg timestamp="20250523 09:45:20.218" level="INFO">Command exited with return code 0.</msg>
+<msg timestamp="20250523 09:45:20.218" level="INFO">${RESULT} = </msg>
+<status status="PASS" starttime="20250523 09:45:20.161" endtime="20250523 09:45:20.218"/>
+</kw>
+<status status="PASS" starttime="20250523 09:45:20.160" endtime="20250523 09:45:20.219"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250523 09:45:25.221" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20250523 09:45:20.220" endtime="20250523 09:45:25.222"/>
+</kw>
+<kw name="CLOSE SSH SESSION" library="ssh_keywords">
+<kw name="Close Connection" library="SSHLibrary">
+<doc>Closes the current connection.</doc>
+<status status="PASS" starttime="20250523 09:45:25.225" endtime="20250523 09:45:25.228"/>
+</kw>
+<status status="PASS" starttime="20250523 09:45:25.224" endtime="20250523 09:45:25.229"/>
+</kw>
+<kw name="Open a browser" library="SeleniumKeywords">
+<arg>${URL}</arg>
+<arg>Chrome</arg>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${url}</arg>
+<arg>${browser}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20250523 09:45:25.232" level="INFO">Opening browser 'Chrome' to base url 'https://google.com'.</msg>
+<msg timestamp="20250523 09:45:26.550" level="WARN">The chromedriver version (135.0.7049.95) detected in PATH at C:\Users\arezgui\AppData\Local\Programs\Python\Python313\Scripts\chromedriver.exe might not be compatible with the detected chrome version (136.0.7103.114); currently, chromedriver 136.0.7103.113 is recommended for chrome 136.*, so it is advised to delete the driver in PATH and retry</msg>
+<status status="PASS" starttime="20250523 09:45:25.231" endtime="20250523 09:45:50.808"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20250523 09:45:50.809" endtime="20250523 09:45:50.904"/>
+</kw>
+<status status="PASS" starttime="20250523 09:45:25.230" endtime="20250523 09:45:50.905"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Ce site est inaccessible</arg>
+<arg>timeout=100s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<msg timestamp="20250523 09:47:31.388" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-5.png"&gt;&lt;img src="selenium-screenshot-5.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250523 09:47:31.389" level="FAIL">Text 'Ce site est inaccessible' did not appear in 1 minute 40 seconds.</msg>
+<status status="FAIL" starttime="20250523 09:45:50.908" endtime="20250523 09:47:31.489"/>
+</kw>
+<kw name="Close a Browser" library="SeleniumKeywords">
+<status status="NOT RUN" starttime="20250523 09:47:31.490" endtime="20250523 09:47:31.490"/>
+</kw>
+<status status="FAIL" starttime="20250523 09:45:14.302" endtime="20250523 09:47:31.492">Text 'Ce site est inaccessible' did not appear in 1 minute 40 seconds.</status>
+</test>
+<status status="FAIL" starttime="20250523 09:45:13.030" endtime="20250523 09:47:31.496"/>
+</suite>
+<suite id="s1-s2" name="Tests firewall" source="c:\Users\arezgui\Desktop\Test\Test_Auto_HGW\Tests_firewall.robot">
+<test id="s1-s2-t1" name="Test Block HTTPS Access" line="8">
+<kw name="OPEN SSH SESSION" library="ssh_keywords">
+<arg>${HOST}</arg>
+<arg>${PORT}</arg>
+<arg>${USERNAME}</arg>
+<arg>${PASSWORD}</arg>
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${HOST}</arg>
+<arg>port=${PORT}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20250523 09:47:31.514" endtime="20250523 09:47:31.515"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${USER}</arg>
+<arg>${PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20250523 09:47:31.516" level="INFO">Logging into '192.168.4.1:22' as 'pi4'.</msg>
+<msg timestamp="20250523 09:47:33.507" level="INFO">Read output: Linux raspberrypi 6.12.20+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.12.20-1+rpt1~bpo12+1 (2025-03-19) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri May 23 09:45:19 2025 from 192.168.4.2
+[?2004hpi4@raspberrypi:~$</msg>
+<status status="PASS" starttime="20250523 09:47:31.515" endtime="20250523 09:47:33.507"/>
+</kw>
+<status status="PASS" starttime="20250523 09:47:31.512" endtime="20250523 09:47:33.508"/>
+</kw>
+<kw name="EXECUTE SSH COMMAND" library="ssh_keywords">
+<arg>sudo iptables -D FORWARD -p tcp --dport 443 -s ${TARGET_IP} -j DROP</arg>
+<kw name="Execute Command" library="SSHLibrary">
+<var>${RESULT}</var>
+<arg>${COMMAND}</arg>
+<doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
+<msg timestamp="20250523 09:47:33.511" level="INFO">Executing command 'sudo iptables -D FORWARD -p tcp --dport 443 -s 192.168.4.3 -j DROP'.</msg>
+<msg timestamp="20250523 09:47:33.597" level="INFO">Command exited with return code 0.</msg>
+<msg timestamp="20250523 09:47:33.598" level="INFO">${RESULT} = </msg>
+<status status="PASS" starttime="20250523 09:47:33.510" endtime="20250523 09:47:33.598"/>
+</kw>
+<status status="PASS" starttime="20250523 09:47:33.509" endtime="20250523 09:47:33.599"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250523 09:47:35.602" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250523 09:47:33.600" endtime="20250523 09:47:35.605"/>
+</kw>
+<kw name="CLOSE SSH SESSION" library="ssh_keywords">
+<kw name="Close Connection" library="SSHLibrary">
+<doc>Closes the current connection.</doc>
+<status status="PASS" starttime="20250523 09:47:35.610" endtime="20250523 09:47:35.614"/>
+</kw>
+<status status="PASS" starttime="20250523 09:47:35.608" endtime="20250523 09:47:35.615"/>
+</kw>
+<kw name="OPEN SSH SESSION" library="ssh_keywords">
+<arg>${HOST}</arg>
+<arg>${PORT}</arg>
+<arg>${USERNAME}</arg>
+<arg>${PASSWORD}</arg>
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${HOST}</arg>
+<arg>port=${PORT}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20250523 09:47:35.619" endtime="20250523 09:47:35.620"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${USER}</arg>
+<arg>${PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20250523 09:47:35.622" level="INFO">Logging into '192.168.4.1:22' as 'pi4'.</msg>
+<msg timestamp="20250523 09:47:37.591" level="INFO">Read output: Linux raspberrypi 6.12.20+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.12.20-1+rpt1~bpo12+1 (2025-03-19) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri May 23 09:47:32 2025 from 192.168.4.2
+[?2004hpi4@raspberrypi:~$</msg>
+<status status="PASS" starttime="20250523 09:47:35.620" endtime="20250523 09:47:37.593"/>
+</kw>
+<status status="PASS" starttime="20250523 09:47:35.618" endtime="20250523 09:47:37.593"/>
+</kw>
+<kw name="EXECUTE SSH COMMAND" library="ssh_keywords">
+<arg>sudo iptables -I FORWARD 1 -p tcp --dport 443 -s ${TARGET_IP} -j DROP</arg>
+<kw name="Execute Command" library="SSHLibrary">
+<var>${RESULT}</var>
+<arg>${COMMAND}</arg>
+<doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
+<msg timestamp="20250523 09:47:37.599" level="INFO">Executing command 'sudo iptables -I FORWARD 1 -p tcp --dport 443 -s 192.168.4.3 -j DROP'.</msg>
+<msg timestamp="20250523 09:47:37.655" level="INFO">Command exited with return code 0.</msg>
+<msg timestamp="20250523 09:47:37.655" level="INFO">${RESULT} = </msg>
+<status status="PASS" starttime="20250523 09:47:37.598" endtime="20250523 09:47:37.656"/>
+</kw>
+<status status="PASS" starttime="20250523 09:47:37.596" endtime="20250523 09:47:37.656"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250523 09:47:42.658" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20250523 09:47:37.657" endtime="20250523 09:47:42.659"/>
+</kw>
+<kw name="CLOSE SSH SESSION" library="ssh_keywords">
+<kw name="Close Connection" library="SSHLibrary">
+<doc>Closes the current connection.</doc>
+<status status="PASS" starttime="20250523 09:47:42.662" endtime="20250523 09:47:42.664"/>
+</kw>
+<status status="PASS" starttime="20250523 09:47:42.660" endtime="20250523 09:47:42.664"/>
+</kw>
+<kw name="Open a browser" library="SeleniumKeywords">
+<arg>${URL}</arg>
+<arg>Chrome</arg>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${url}</arg>
+<arg>${browser}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20250523 09:47:42.670" level="INFO">Opening browser 'Chrome' to base url 'https://google.com'.</msg>
+<msg timestamp="20250523 09:47:43.842" level="WARN">The chromedriver version (135.0.7049.95) detected in PATH at C:\Users\arezgui\AppData\Local\Programs\Python\Python313\Scripts\chromedriver.exe might not be compatible with the detected chrome version (136.0.7103.114); currently, chromedriver 136.0.7103.113 is recommended for chrome 136.*, so it is advised to delete the driver in PATH and retry</msg>
+<status status="PASS" starttime="20250523 09:47:42.667" endtime="20250523 09:48:16.859"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20250523 09:48:16.860" endtime="20250523 09:48:16.935"/>
+</kw>
+<status status="PASS" starttime="20250523 09:47:42.666" endtime="20250523 09:48:16.936"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Ce site est inaccessible</arg>
+<arg>timeout=100s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<msg timestamp="20250523 09:49:57.409" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-6.png"&gt;&lt;img src="selenium-screenshot-6.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20250523 09:49:57.410" level="FAIL">Text 'Ce site est inaccessible' did not appear in 1 minute 40 seconds.</msg>
+<status status="FAIL" starttime="20250523 09:48:16.943" endtime="20250523 09:49:57.415"/>
+</kw>
+<kw name="Close a Browser" library="SeleniumKeywords">
+<status status="NOT RUN" starttime="20250523 09:49:57.416" endtime="20250523 09:49:57.417"/>
+</kw>
+<status status="FAIL" starttime="20250523 09:47:31.511" endtime="20250523 09:49:57.418">Text 'Ce site est inaccessible' did not appear in 1 minute 40 seconds.</status>
+</test>
+<status status="FAIL" starttime="20250523 09:47:31.500" endtime="20250523 09:49:57.431"/>
+</suite>
+<status status="FAIL" starttime="20250523 09:45:12.997" endtime="20250523 09:49:57.438"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="2" skip="0" id="s1" name="Tests Firewall &amp; Tests firewall">Tests Firewall &amp; Tests firewall</stat>
+<stat pass="0" fail="1" skip="0" id="s1-s1" name="Tests Firewall">Tests Firewall &amp; Tests firewall.Tests Firewall</stat>
+<stat pass="0" fail="1" skip="0" id="s1-s2" name="Tests firewall">Tests Firewall &amp; Tests firewall.Tests firewall</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20250523 09:45:26.550" level="WARN">The chromedriver version (135.0.7049.95) detected in PATH at C:\Users\arezgui\AppData\Local\Programs\Python\Python313\Scripts\chromedriver.exe might not be compatible with the detected chrome version (136.0.7103.114); currently, chromedriver 136.0.7103.113 is recommended for chrome 136.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg timestamp="20250523 09:47:43.842" level="WARN">The chromedriver version (135.0.7049.95) detected in PATH at C:\Users\arezgui\AppData\Local\Programs\Python\Python313\Scripts\chromedriver.exe might not be compatible with the detected chrome version (136.0.7103.114); currently, chromedriver 136.0.7103.113 is recommended for chrome 136.*, so it is advised to delete the driver in PATH and retry</msg>
+</errors>
+</robot>
